@@ -1,15 +1,9 @@
 import gradio as gr
-import requests
+from agent import invoke_crew
 
-API_URL = "http://localhost:8080/study"  # FastAPI backend
-
-
-# Function to handle study mentor interaction
-def get_study_plan(user_id, topic):
-    payload = {"user_id": user_id, "topic": topic}
-    response = requests.post(API_URL, json=payload)
-    return response.json().get("study_plan", "No study plan available.")
-
+def study_mentor_interface(user_id, topic):
+    result = invoke_crew(user_id, topic)
+    return result
 
 # Define Gradio UI
 with gr.Blocks() as demo:
@@ -21,7 +15,7 @@ with gr.Blocks() as demo:
     submit_btn = gr.Button("Get Study Plan")
     study_plan_output = gr.Textbox(label="Study Plan", interactive=False)
 
-    submit_btn.click(fn=get_study_plan, inputs=[user_id, topic], outputs=study_plan_output)
+    submit_btn.click(fn=study_mentor_interface, inputs=[user_id, topic], outputs=study_plan_output)
 
 # Run the Gradio app
 if __name__ == "__main__":

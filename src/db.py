@@ -13,7 +13,7 @@ class UserProgress(Base):
     __tablename__ = "user_progress"
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(String, unique=True, index=True)
+    user_id = Column(String, index=True)
     topic = Column(String)
     progress = Column(JSON)  # Stores lessons completed, quiz scores, etc.
 
@@ -33,3 +33,10 @@ def update_progress(user_id, topic, progress):
         session.add(user)
     session.commit()
     session.close()
+
+# Function to get user progress
+def get_user_progress(user_id, topic):
+    session = SessionLocal()
+    user = session.query(UserProgress).filter_by(user_id=user_id, topic=topic).first()
+    session.close()
+    return user.progress if user else None

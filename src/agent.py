@@ -7,7 +7,7 @@ from db import update_progress, get_user_progress
 # With Crew AI, we need to use Ollama provided URL and not our own LLM API endpoint
 LLM_API_URL="http://localhost:11434"
 
-# Agent 1: Study Planner
+# Agent 1: Study Planner agent
 study_planner = Agent(
     role="Study Planner",
     goal="Create a structured study plan for the given topic: {topic}",

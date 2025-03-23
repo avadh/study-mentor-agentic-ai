@@ -4,6 +4,7 @@ from db import update_progress, get_user_progress
 
 # Update with your locally hosted LLM API
 # LLM_API_URL = "http://localhost:8000/v1/completions"
+# With Crew AI, we need to use Ollama provided URL and not our own LLM API endpoint
 LLM_API_URL="http://localhost:11434"
 
 # Agent 1: Study Planner
